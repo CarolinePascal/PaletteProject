@@ -1,6 +1,12 @@
 #include <iostream>
+#include "Picture.h"
+ 
+int main( int argc, char** argv ) {
+    
+    Picture picture = Picture("Square.jpg");
+    picture.Display();
 
-int main() {
-    std::cout << "Hello World!";
-    return 0;
+    cout<<picture.GetRGB(20,20)<<endl;
+
+    return(1);
 }
