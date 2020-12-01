@@ -4,7 +4,6 @@
 #include <opencv2/core.hpp>
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/highgui.hpp>
-
 #include <iostream>
 
 using namespace cv;
@@ -17,8 +16,10 @@ private:
 public:
     Picture(const String &fileName);
     ~Picture();
-    void Display();
-    Vec3i GetRGB(int i, int j);
+    void Display() const;
+    Vec3i GetRGB(int i, int j) const;
+    Vec3i GetRGB(int k) const;
+    int GetPictureResolution() const;
 };
 
 #endif
