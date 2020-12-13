@@ -1,30 +1,15 @@
 cmake_minimum_required(VERSION 3.10)
-SET(CMAKE_CXX_STANDARD 11)
 
-#Set the project name
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_BUILD_TYPE Release)   #Debug if needed !
+
+#Set project name
 project(PaletteProject)
 
-#Add the executable
-set(SOURCES
-    main.cpp
-    KMeans.cpp
-    Picture.cpp
-    )
+#Add sources folder
+add_subdirectory(src)
 
-set(HEADERS
-    KMeans.h
-    Picture.h
-    )
 
-add_executable(PaletteProject ${SOURCES} ${HEADERS})
 
-#Search packages
-find_package(Threads REQUIRED)
-target_link_libraries (PaletteProject Threads::Threads)
-
-find_package(OpenCV REQUIRED)
-include_directories(${OpenCV_INCLUDE_DIRS})
-target_link_libraries(PaletteProject ${OpenCV_LIBS})
-
-#Executable generation
 

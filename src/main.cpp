@@ -1,14 +1,16 @@
 #include <iostream>
 #include <thread>
 
-#include "Picture.h"
-#include "KMeans.h"
+#include "../include/Picture.h"
+#include "../include/KMeans.h"
+
+using namespace cv;
+using namespace std;
  
 int main( int argc, char** argv ) {
 
     //Parameters parsing - Name of the picture file, number of colors within the palette
-
-    String fileName = "";
+    string fileName = "";
     int colorNumber = 5;
 
     switch (argc)
@@ -31,18 +33,16 @@ int main( int argc, char** argv ) {
     }
 
     //Initialize random seed: 
-    srand (time(NULL));
+    srand(time(NULL));
 
-    //Display picture TODO Internalize thread
+    //Display picture
     Picture picture = Picture(fileName);
-    thread thread_picture(&Picture::Display,&picture);
+    picture.Display();
 
-    //Compute and display palette TODO Internalize thread
+    //Compute and display palette
     vector<Vec3i> test = KMeans(picture, colorNumber, 10);
-    thread thread_palette(DisplayPalette,test);
-    
-    thread_picture.join();
-    thread_palette.join();
-    
-    return(1);
+    DisplayPalette(test);
+
+    waitKey(0);
+    return(0);
 }

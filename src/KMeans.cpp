@@ -1,7 +1,10 @@
 #include <stdlib.h>
 #include <opencv2/imgproc.hpp>
 
-#include "KMeans.h"
+#include "../include/KMeans.h"
+
+using namespace cv;
+using namespace std;
 
 float DistanceRGB(const Vec3i &pixel1, const Vec3i &pixel2)
 {
@@ -119,5 +122,4 @@ void DisplayPalette(const vector<Vec3i> &centroids)
 
     namedWindow("Palette",WINDOW_AUTOSIZE);
     imshow("Palette",palette);
-    waitKey(0);
 }

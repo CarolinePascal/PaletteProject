@@ -6,19 +6,16 @@
 #include <opencv2/highgui.hpp>
 #include <iostream>
 
-using namespace cv;
-using namespace std;
-
 class Picture
 {
 private:
-    Mat matrix;
+    cv::Mat matrix;
 public:
-    Picture(const String &fileName);
+    Picture(const std::string &fileName);
     ~Picture();
     void Display() const;
-    Vec3i GetRGB(int i, int j) const;
-    Vec3i GetRGB(int k) const;
+    cv::Vec3i GetRGB(int i, int j) const;
+    cv::Vec3i GetRGB(int k) const;
     int GetPictureResolution() const;
 };
 

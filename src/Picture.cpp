@@ -1,8 +1,13 @@
+#define MAX_PICTURE_RESOLUTION 1000000
+
 #include <opencv2/imgproc.hpp>
 
-#include "Picture.h"
+#include "../include/Picture.h"
 
-Picture::Picture(const String &fileName)
+using namespace cv;
+using namespace std;
+
+Picture::Picture(const string &fileName)
 {
     // Read the image file
     matrix = imread(fileName,IMREAD_COLOR);
@@ -13,7 +18,10 @@ Picture::Picture(const String &fileName)
         throw("Could not read Picture !");
     }
 
-    //TODO Resize the picture if too large
+    if(GetPictureResolution() > MAX_PICTURE_RESOLUTION)
+    {
+        resize(matrix,matrix,Size(matrix.cols*0.5,matrix.rows*0.5),0,0,INTER_LINEAR);
+    }
 }
 
 Picture::~Picture()
@@ -24,12 +32,10 @@ void Picture::Display() const
 {
     namedWindow("Picture",WINDOW_AUTOSIZE);
     imshow("Picture",matrix);
-    waitKey(0);
 }
 
 Vec3i Picture::GetRGB(int i, int j) const
 {
-    //TODO Replace Vec3i by Scalar 
     Vec3b BGR = matrix.at<Vec3b>(i,j);
     int B = BGR.val[0];
     int G = BGR.val[1];
